@@ -15,6 +15,7 @@ where L is the average number of letters per 100 words in the text, and S is the
 
 #include <cs50.h>
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
@@ -26,5 +27,9 @@ int main(void)
 
 int get_letter_count(string text){
     // any character that is not special character and space is a letter
-    // basically any ascii codes between 
+    // basically any ascii codes between 65 to 90 and 97 to 122
+    if (s[i] >= 'a' && s[i] <= 'z')
+        {
+            printf("%c", s[i] - 32);
+        }
 }
