@@ -16,6 +16,7 @@ where L is the average number of letters per 100 words in the text, and S is the
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 int get_letter_count(string text);
 int get_word_count(string text);
@@ -34,8 +35,8 @@ int main(void)
     int L, S;
     L = letter_count / ((float) word_count / 100.0);
     S = sentence_count / ((float) word_count / 100.0);
-    float index = 0.0588 * L - 0.296 * S - 15.8
-    printf()
+    float index = 0.0588 * L - 0.296 * S - 15.8;
+    printf("Grade %i\n", (int) round(index));
     return 0;
 }
 
