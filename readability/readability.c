@@ -17,19 +17,30 @@ where L is the average number of letters per 100 words in the text, and S is the
 #include <stdio.h>
 #include <string.h>
 
+int get_letter_count(string text);
+int get_word_count(string text);
+
 int main(void)
 {
-    string text = get_string("Text: ")
-
-
+    string text = get_string("Text: ");
+    printf("Letter count: %i\n", get_letter_count(text));
+    return 0;
 
 }
 
 int get_letter_count(string text){
     // any character that is not special character and space is a letter
     // basically any ascii codes between 65 to 90 and 97 to 122
-    if (s[i] >= 'a' && s[i] <= 'z')
+    int i = 0;
+    for (int itr = 0, len = strlen(text); itr < len; itr++){
+        if ((text[itr] >= 'a' && text[itr] <= 'z') || (text[itr] >= 'A' && text[itr] <= 'Z'))
         {
-            printf("%c", s[i] - 32);
+            i++;
         }
+    }
+    return i;
+}
+
+int get_word_count(string text){
+    // any sequence of characters separated by spaces should count as a word
 }
