@@ -44,7 +44,12 @@ int get_letter_count(string text){
 int get_word_count(string text){
     // any sequence of characters separated by spaces should count as a word
     // need to find the 'edges' of words
-    // case 1: 1 space -- prev and fwd are non-space chars
-    // case 2: >1 space -- prev are non-space while fwd are space chars
-    // case 3: >1 space -- prev is space
+    // space counting approach
+    // no of spaces + 1
+    int spaces = 0;
+    for (int i = 0, len = strlen(text); i < len; i++){
+        do{
+
+        }while()
+    }
 }
