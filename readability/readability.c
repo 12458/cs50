@@ -18,5 +18,6 @@ where L is the average number of letters per 100 words in the text, and S is the
 
 int main(void)
 {
+    string text = get_string("Text: ")
 
 }
