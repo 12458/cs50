@@ -63,4 +63,8 @@ int get_word_count(string text){
 
 int get_sentence_count(string text){
     // count the number of ? ! .
+    for (int i = 0, len = strlen(text); i < len; i++){
+        if (text[i] == ' '){
+            
+    }
 }
