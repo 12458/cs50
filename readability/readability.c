@@ -24,6 +24,7 @@ int main(void)
 
 }
 
-int get_character_count(string text){
-    
+int get_letter_count(string text){
+    // any character that is not special character and space is a letter
+    // basically any ascii codes between 
 }
