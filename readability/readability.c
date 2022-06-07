@@ -48,6 +48,7 @@ int get_word_count(string text){
     // no of spaces + 1
     int spaces = 0;
     for (int i = 0, len = strlen(text); i < len; i++){
+        
         do{
 
         }while()
