@@ -32,7 +32,7 @@ int main(void)
     int letter_count = get_letter_count(text);
     int word_count = get_word_count(text);
     int sentence_count = get_sentence_count(text);
-    int L, S;
+    float L, S;
     L = letter_count / ((float) word_count / 100.0);
     S = sentence_count / ((float) word_count / 100.0);
     float index = 0.0588 * L - 0.296 * S - 15.8;
