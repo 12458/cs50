@@ -24,6 +24,7 @@ int get_sentence_count(string text);
 int main(void)
 {
     string text = get_string("Text: ");
+    printf("%s\n", text)
     printf("Letter count: %i\n", get_letter_count(text));
     printf("Word count: %i\n", get_word_count(text));
     return 0;
