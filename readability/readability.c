@@ -19,6 +19,7 @@ where L is the average number of letters per 100 words in the text, and S is the
 
 int get_letter_count(string text);
 int get_word_count(string text);
+int get_sentence_count(string text);
 
 int main(void)
 {
@@ -57,4 +58,8 @@ int get_word_count(string text){
             }
     }
     return spaces + 1;
+}
+
+int get_sentence_count(string text){
+    // count the number of ? ! .
 }
