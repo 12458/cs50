@@ -24,6 +24,7 @@ int main(void)
 {
     string text = get_string("Text: ");
     printf("Letter count: %i\n", get_letter_count(text));
+    printf("Word count: %i\n", get_word_count(text));
     return 0;
 
 }
@@ -48,9 +49,12 @@ int get_word_count(string text){
     // no of spaces + 1
     int spaces = 0;
     for (int i = 0, len = strlen(text); i < len; i++){
-        
-        do{
-
-        }while()
+        if (text[i] == ' '){
+            while (text[i+1] == ' '){
+                i++;
+            }
+            spaces++;
+            }
     }
+    return spaces + 1;
 }
