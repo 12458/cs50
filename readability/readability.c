@@ -28,8 +28,13 @@ int main(void)
     //printf("Letter count: %i\n", get_letter_count(text));
     //printf("Word count: %i\n", get_word_count(text));
     //printf("Sentence count: %i\n", get_sentence_count(text));
+    int letter_count = get_letter_count(text);
+    int word_count = get_word_count(text);
+    int sentence_count = get_sentence_count(text);
     int L, S;
-    L = 
+    L = letter_count / ((float) word_count / 100.0);
+    S = sentence_count / ((float) word_count / 100.0);
+    
     return 0;
 }
 
