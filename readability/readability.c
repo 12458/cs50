@@ -24,9 +24,10 @@ int get_sentence_count(string text);
 int main(void)
 {
     string text = get_string("Text: ");
-    printf("%s\n", text)
+    printf("%s\n", text);
     printf("Letter count: %i\n", get_letter_count(text));
     printf("Word count: %i\n", get_word_count(text));
+    printf("Sentence count: %i\n", get_sentence_count(text));
     return 0;
 
 }
@@ -63,8 +64,11 @@ int get_word_count(string text){
 
 int get_sentence_count(string text){
     // count the number of ? ! .
+    int count = 0;
     for (int i = 0, len = strlen(text); i < len; i++){
-        if (text[i] == ' '){
-            
+        if (text[i] == '?' || text[i] == '.' || text[i] == '!'){
+            count++;
+        }
     }
+    return count;
 }
