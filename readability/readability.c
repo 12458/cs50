@@ -20,4 +20,10 @@ int main(void)
 {
     string text = get_string("Text: ")
 
+
+
+}
+
+int get_character_count(string text){
+    
 }
