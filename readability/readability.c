@@ -25,11 +25,11 @@ int main(void)
 {
     string text = get_string("Text: ");
     printf("%s\n", text);
-    printf("Letter count: %i\n", get_letter_count(text));
-    printf("Word count: %i\n", get_word_count(text));
-    printf("Sentence count: %i\n", get_sentence_count(text));
+    //printf("Letter count: %i\n", get_letter_count(text));
+    //printf("Word count: %i\n", get_word_count(text));
+    //printf("Sentence count: %i\n", get_sentence_count(text));
+    int L, 
     return 0;
-
 }
 
 int get_letter_count(string text){
