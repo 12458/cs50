@@ -34,7 +34,8 @@ int main(void)
     int L, S;
     L = letter_count / ((float) word_count / 100.0);
     S = sentence_count / ((float) word_count / 100.0);
-    
+    float index = 0.0588 * L - 0.296 * S - 15.8
+    printf()
     return 0;
 }
 
