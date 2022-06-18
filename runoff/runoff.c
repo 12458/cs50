@@ -154,6 +154,7 @@ int find_min(void)
             min = candiates[i].votes;
         }
     }
+    if 
     return 0;
 }
 
