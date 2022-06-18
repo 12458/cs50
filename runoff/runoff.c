@@ -1,5 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <string.h>
 
 // Max voters and candidates
 #define MAX_VOTERS 100
@@ -150,7 +151,7 @@ void tabulate(void)
     */
     for (int i = 0; i < voter_count; i++){
         for (int j = 0; j < candidate_count; j++){
-            if (preferences[i].eliminated){
+            if (candidates[preferences[i][j]].eliminated){
                 continue;
             }
             else{
@@ -165,8 +166,8 @@ void tabulate(void)
 bool print_winner(void)
 {
     for (int i = 0; i < candidate_count; i++){
-        if (candiates[i].votes * 2 > voter_count){
-            printf("%s", candiates[i].name);
+        if (candidates[i].votes * 2 > voter_count){
+            printf("%s", candidates[i].name);
             return true;
         }
     }
@@ -178,8 +179,8 @@ int find_min(void)
 {
     int min = INT_MAX;
     for (int i = 0; i < candidate_count; i++){
-        if (candiates[i].votes < min && candiates[i].eliminated == false){
-            min = candiates[i].votes;
+        if (candidates[i].votes < min && candidates[i].eliminated == false){
+            min = candidates[i].votes;
         }
     }
     return min;
@@ -193,7 +194,7 @@ bool is_tie(int min)
     The function should return true if every candidate remaining in the election has the same number of votes, and should return false otherwise.
     */
     for (int i = 0; i < candidate_count; i++){
-        if (candiates[i].votes != min && candiates[i].eliminated == false){
+        if (candidates[i].votes != min && candidates[i].eliminated == false){
             return false
         }
     }
@@ -208,7 +209,7 @@ void eliminate(int min)
     The function should eliminate the candidate (or candidates) who have min number of votes.
     */
     for (int i = 0; i < candidate_count; i++){
-        if (candiates[i].votes == min){
+        if (candidates[i].votes == min){
             candidates[i].eliminated = true;
         }
     }
