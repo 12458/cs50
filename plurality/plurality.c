@@ -1,6 +1,8 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 // Max number of candidates
 #define MAX 9
@@ -79,6 +81,10 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    
+    qsort(candidates,MAX,sizeof(candidate),compare)
     return;
+}
+
+int compare(const void * a, const void * b){
+    
 }
