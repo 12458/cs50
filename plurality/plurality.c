@@ -24,7 +24,7 @@ int candidate_count;
 // Function prototypes
 bool vote(string name);
 void print_winner(void);
-void bubbleSort(int array[], int size);
+void bubbleSort(candidate array[], int size);
 
 int main(int argc, string argv[])
 {
@@ -70,9 +70,9 @@ int main(int argc, string argv[])
 bool vote(string name)
 {
     for (int i = 0; i < MAX; i++){
-        if (strcmp(candidate[i].name, name) == 0)
+        if (strcmp(candidates[i].name, name) == 0)
         {
-            candidate[i].votes++;
+            candidates[i].votes++;
             return true;
         }
     }
@@ -86,9 +86,9 @@ void print_winner(void)
     bubbleSort(candidates, size);
     int largest_vote = candidates[0].votes;
     for (int i = 0; i < MAX; i++){
-        if (candidate[i].votes == largest_vote)
+        if (candidates[i].votes == largest_vote)
         {
-            printf("%s\n", candidate[i].name);
+            printf("%s\n", candidates[i].name);
         }
     }
     return;
@@ -103,7 +103,7 @@ void bubbleSort(candidate array[], int size) {
         for (int i = 0; i < size - step - 1; ++i) {
             if (array[i].votes < array[i + 1].votes) {
                 //swap
-                int temp = array[i];
+                candidate temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
 
