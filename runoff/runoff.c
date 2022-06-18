@@ -150,12 +150,11 @@ void tabulate(void)
     Recall that at each stage in the runoff, every voter effectively votes for their top-preferred candidate who has not already been eliminated.
     */
     for (int j = 0; j < candidate_count; j++){
-        if (candidates[preferences[i][j]].eliminated){
-            continue;
+        int i = 0;
+        while(candidates[preferences[i][j]].eliminated){
+            i++;
         }
-        else{
-            candidates[preferences[i][j]].votes++;
-        }
+        candidates[preferences[i][j]].votes++;
     }
     return;
 }
