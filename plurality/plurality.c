@@ -66,7 +66,14 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    for (int i = 0; i < str)
+    if (strcmp(people[i].name, "David") == 0)
+        {
+            printf("Found %s\n", people[i].number);
+            return 0;
+    }
+
+
     return false;
 }
 
