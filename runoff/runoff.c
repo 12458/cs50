@@ -159,7 +159,11 @@ bool is_tie(int min)
     The function takes an argument min, which will be the minimum number of votes that anyone in the election currently has.
     The function should return true if every candidate remaining in the election has the same number of votes, and should return false otherwise.
     */
-    
+    for (int i = 0; i < candidate_count; i++){
+        if (candiates[i].votes == min){
+            candidates[i].eliminated = true;
+        }
+    }
     return false;
 }
 
