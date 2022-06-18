@@ -132,7 +132,7 @@ bool vote(int voter, int rank, string name)
     If the preference is successfully recorded, the function should return true; the function should return false otherwise (if, for instance, name is not the name of one of the candidates).
     You may assume that no two candidates will have the same name.
     */
-    preferences[voter][rank] = name
+    preferences[voter][rank] = 
     return false;
 }
 
