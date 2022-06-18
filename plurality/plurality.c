@@ -81,10 +81,28 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    qsort(candidates,MAX,sizeof(candidate),compare)
+    int size = sizeof(candidates) / sizeof(candidate);
+
     return;
 }
 
-int compare(const void * a, const void * b){
-    
+void bubbleSort(int array[], int size) {
+
+    for (int step = 0; step < size - 1; ++step) {
+
+        int swapped = 0;
+
+        for (int i = 0; i < size - step - 1; ++i) {
+            if (array[i] > array[i + 1]) {
+                int temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+
+                swapped = 1;
+            }
+        }
+
+        if (!swapped) break;
+
+    }
 }
