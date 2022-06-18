@@ -154,7 +154,7 @@ void tabulate(void)
                 continue;
             }
             else{
-
+                candidates[i][]
             }
         }
     }
