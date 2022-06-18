@@ -24,6 +24,7 @@ int candidate_count;
 // Function prototypes
 bool vote(string name);
 void print_winner(void);
+void bubbleSort(int array[], int size);
 
 int main(int argc, string argv[])
 {
@@ -82,18 +83,20 @@ bool vote(string name)
 void print_winner(void)
 {
     int size = sizeof(candidates) / sizeof(candidate);
-
+    bubbleSort(candidates, size);
+    print
     return;
 }
 
-void bubbleSort(int array[], int size) {
+void bubbleSort(candidate array[], int size) {
 
     for (int step = 0; step < size - 1; ++step) {
 
         int swapped = 0;
 
         for (int i = 0; i < size - step - 1; ++i) {
-            if (array[i] > array[i + 1]) {
+            if (array[i].vote > array[i + 1].vote) {
+                //swap
                 int temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
