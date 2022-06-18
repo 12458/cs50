@@ -148,7 +148,9 @@ void tabulate(void)
     The function should update the number of votes each candidate has at this stage in the runoff.
     Recall that at each stage in the runoff, every voter effectively votes for their top-preferred candidate who has not already been eliminated.
     */
-    
+    for (int i = 0; i < candidate_count; i++){
+        
+    }
     return;
 }
 
