@@ -72,7 +72,7 @@ bool vote(string name)
     for (int i = 0; i < MAX; i++){
         if (strcmp(candidate[i].name, name) == 0)
         {
-            candidate[i].vote++;
+            candidate[i].votes++;
             return true;
         }
     }
@@ -84,7 +84,13 @@ void print_winner(void)
 {
     int size = sizeof(candidates) / sizeof(candidate);
     bubbleSort(candidates, size);
-    print
+    int largest_vote = candidates[0].votes;
+    for (int i = 0; i < MAX; i++){
+        if (candidate[i].votes == largest_vote)
+        {
+            printf("%s\n", candidate[i].name);
+        }
+    }
     return;
 }
 
@@ -95,7 +101,7 @@ void bubbleSort(candidate array[], int size) {
         int swapped = 0;
 
         for (int i = 0; i < size - step - 1; ++i) {
-            if (array[i].vote > array[i + 1].vote) {
+            if (array[i].votes < array[i + 1].votes) {
                 //swap
                 int temp = array[i];
                 array[i] = array[i + 1];
