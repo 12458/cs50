@@ -149,11 +149,14 @@ void tabulate(void)
     The function should update the number of votes each candidate has at this stage in the runoff.
     Recall that at each stage in the runoff, every voter effectively votes for their top-preferred candidate who has not already been eliminated.
     */
+    printf("TABULATE");
     for (int j = 0; j < candidate_count; j++){
+        printf("\tAT BALLOT %i", j);
         int i = 0;
         while(candidates[preferences[j][i]].eliminated){
             i++;
         }
+        printf("\tADD ");
         candidates[preferences[j][i]].votes++;
     }
     return;
