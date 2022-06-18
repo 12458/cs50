@@ -69,7 +69,8 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    for (int i = 0; i < MAX; i++){
+    for (int i = 0; i < candidate_count; i++){
+        // printf("COMPARE %s and %s at idx %i\n", candidates[i].name, name, i);
         if (strcmp(candidates[i].name, name) == 0)
         {
             candidates[i].votes++;
@@ -85,7 +86,7 @@ void print_winner(void)
     int size = sizeof(candidates) / sizeof(candidate);
     bubbleSort(candidates, size);
     int largest_vote = candidates[0].votes;
-    for (int i = 0; i < MAX; i++){
+    for (int i = 0; i < candidate_count; i++){
         if (candidates[i].votes == largest_vote)
         {
             printf("%s\n", candidates[i].name);
