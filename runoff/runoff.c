@@ -162,6 +162,10 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
+    /*
+    The function takes an argument min, which will be the minimum number of votes that anyone in the election currently has.
+    The function should eliminate the candidate (or candidates) who have min number of votes.
+    */
+    for (int i = 0; )
     return;
 }
