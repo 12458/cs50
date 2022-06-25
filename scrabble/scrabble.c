@@ -21,14 +21,14 @@ int main(void)
     int score2 = compute_score(word2);
 
     // TODO: Print the winner
-    if (score1 == score2){printf("Tie!");}
+    if (score1 == score2){printf("Tie!\n");}
     else{printf(score1 > score2 ? "Player 1 wins!\n" : "Player 2 wins!\n");}
 }
 
 int compute_score(string word)
 {
     int cumulative = 0;
-    for (int i = 0; i < strlen(word); i++){
+    for (int i = 0; i < strlen(word); i ++){
         cumulative += compute_score_char(word[i]);
     }
     return cumulative;
@@ -37,5 +37,5 @@ int compute_score(string word)
 
 int compute_score_char(char letter){
     if (!islower(letter)){return 0;}
-    return POINTS[];
+    return POINTS[(int)letter];
 }
