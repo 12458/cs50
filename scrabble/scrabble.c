@@ -28,7 +28,7 @@ int main(void)
 int compute_score(string word)
 {
     int cumulative = 0;
-    for (int i = 0; i < strlen(word); i ++){
+    for (int i = 0; i < strlen(word); i++){
         cumulative += compute_score_char(word[i]);
     }
     return cumulative;
