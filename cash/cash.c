@@ -48,24 +48,23 @@ int get_cents(void)
 
 int calculate_quarters(int cents)
 {
-    // TODO
-    return 0;
+    /*
+    Implement calculate_quarters in such a way that the function calculates (and returns as an int) how many quarters a customer should be given if they’re owed some number of cents. For instance, if cents is 25, then calculate_quarters should return 1. If cents is 26 or 49 (or anything in between, then calculate_quarters should also return 1. If cents is 50 or 74 (or anything in between), then calculate_quarters should return 2. And so forth.
+    */
+    return cents / 25;
 }
 
 int calculate_dimes(int cents)
 {
-    // TODO
-    return 0;
+    return cents / 10;
 }
 
 int calculate_nickels(int cents)
 {
-    // TODO
-    return 0;
+    return cents / 5;
 }
 
 int calculate_pennies(int cents)
 {
-    // TODO
-    return 0;
+    return cents;
 }
