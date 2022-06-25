@@ -37,5 +37,5 @@ int compute_score(string word)
 
 int compute_score_char(char letter){
     if (!islower(letter)){return 0;}
-    return POINTS[atoi(letter)];
+    return POINTS[];
 }
