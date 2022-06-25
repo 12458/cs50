@@ -37,8 +37,13 @@ int main(void)
 
 int get_cents(void)
 {
-    // TODO
-    return 0;
+    /*
+    Implement get_cents in such a way that the function prompts the user for a number of cents using get_int and then returns that number as an int. If the user inputs a negative int, your code should prompt the user again. (But you don’t need to worry about the user inputting, e.g., a string, as get_int will take care of that for you.) Odds are you’ll find a do while loop of help, as in mario.c!
+    */
+    do {
+        int cents = get_int("Enter number of cents > ");
+    } while(cents < 0);
+    return cents;
 }
 
 int calculate_quarters(int cents)
