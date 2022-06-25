@@ -19,6 +19,7 @@ int main(void)
     int score2 = compute_score(word2);
 
     // TODO: Print the winner
+    if (score1 > score2)
 }
 
 int compute_score(string word)
