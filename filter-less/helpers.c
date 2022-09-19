@@ -5,7 +5,7 @@
 void grayscale(int height, int width, RGBTRIPLE image[height][width]) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            BYTE avg = (BYTE)ceil((image[i][j].rgbtBlue + image[i][j].rgbtRed + image[i][j].rgbtGreen) / 3.0);
+            BYTE avg = (BYTE)round((image[i][j].rgbtBlue + image[i][j].rgbtRed + image[i][j].rgbtGreen) / 3.0);
             image[i][j].rgbtBlue = avg;
             image[i][j].rgbtRed = avg;
             image[i][j].rgbtGreen = avg;
@@ -22,9 +22,9 @@ void sepia(int height, int width, RGBTRIPLE image[height][width]) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             RGBTRIPLE tmp = image[i][j];
-            int s_red = (int)ceil(.393 * tmp.rgbtRed + .769 * tmp.rgbtGreen + .189 * tmp.rgbtBlue);
-            int s_green = (int)ceil(.349 * tmp.rgbtRed + .686 * tmp.rgbtGreen + .168 * tmp.rgbtBlue);
-            int s_blue = (int)ceil(.272 * tmp.rgbtRed + .534 * tmp.rgbtGreen + .131 * tmp.rgbtBlue);
+            int s_red = (int)round(.393 * tmp.rgbtRed + .769 * tmp.rgbtGreen + .189 * tmp.rgbtBlue);
+            int s_green = (int)round(.349 * tmp.rgbtRed + .686 * tmp.rgbtGreen + .168 * tmp.rgbtBlue);
+            int s_blue = (int)round(.272 * tmp.rgbtRed + .534 * tmp.rgbtGreen + .131 * tmp.rgbtBlue);
 
             image[i][j].rgbtRed = (s_red > 255) ? (255) : ((BYTE)s_red);
             image[i][j].rgbtGreen = (s_green > 255) ? (255) : ((BYTE)s_green);
