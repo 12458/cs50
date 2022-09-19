@@ -1,0 +1,32 @@
+SORT1
+random5000.txt: 0.220s
+random10000.txt: 0.382s
+random50000.txt: 7.897s
+reversed5000.txt: 0.085s
+reversed10000.txt: 0.254s
+reversed50000.txt: 5.779s
+sorted5000.txt: 0.046s
+sorted10000.txt: 0.128s
+sorted50000.txt: 0.747s
+
+SORT2
+random5000.txt: 0.045s
+random10000.txt: 0.075s
+random50000.txt: 1.119s
+reversed5000.txt: 0.025s
+reversed10000.txt: 0.066s
+reversed50000.txt: 1.025s
+sorted5000.txt: 0.024s
+sorted10000.txt: 0.072s
+sorted50000.txt: 0.740s
+
+SORT3
+random5000.txt: 0.067s
+random10000.txt: 0.150s
+random50000.txt: 3.775s
+reversed5000.txt: 0.117s
+reversed10000.txt: 0.225s
+reversed50000.txt: 3.344s
+sorted5000.txt: 0.047s
+sorted10000.txt: 0.195s
+sorted50000.txt: 3.401s
