@@ -49,13 +49,6 @@ void reflect(int height, int width, RGBTRIPLE image[height][width]) {
     return;
 }
 
-int bt(int lb, int ub, int val) {
-    if (val > lb && val < ub) {
-        return val;
-    }
-    return -1;
-}
-
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width]) {
     RGBTRIPLE copy[height][width];
@@ -83,30 +76,23 @@ void blur(int height, int width, RGBTRIPLE image[height][width]) {
 
     */
 
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            int box_i[9] = {i - 1, i - 1, i - 1,
-                            i, i, i,
-                            i + 1, i + 1, i + 1};
-            int box_j[9] = {j - 1, j, j + 1,
-                            j - 1, j, j + 1,
-                            j - 1, j, j + 1};
-            for (int k = 0; k < 9; k++) {
-                box_j[k] = bt(0, width - 1, box_j[k]);
-                box_i[k] = bt(0, height - 1, box_i[k]);
-            }
+    for (int h = 0; h < height; i++) {
+        for (int h = 0; w < width; j++) {
             int cum_red = 0;
             int cum_green = 0;
             int cum_blue = 0;
             int items = 0;
-            for (int k = 0; k < 9; k++) {
-                if (box_j[k] == -1 || box_i[k] == -1) {
-                    continue;
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    // checks the boxes around the pixel by using [-1][-1], [-1][0], [-1][1], ... etc
+                    // makes sure we don't go past width/height and 0
+                    if ((h + i >= 0 && h + i < height) && (w + j >= 0 && w + j < width)) {
+                        items++;
+                        cum_red += copy[h + i][w + j].rgbtRed;
+                        cum_green += copy[h + i][w + j].rgbtGreen;
+                        cum_blue += copy[h + i][w + j].rgbtBlue;
+                    }
                 }
-                cum_red += copy[box_i[k]][box_j[k]].rgbtRed;
-                cum_green += copy[box_i[k]][box_j[k]].rgbtGreen;
-                cum_blue += copy[box_i[k]][box_j[k]].rgbtBlue;
-                items++;
             }
             image[i][j].rgbtRed = (BYTE)round(cum_red / (float)items);
             image[i][j].rgbtGreen = (BYTE)round(cum_green / (float)items);
