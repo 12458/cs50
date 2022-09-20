@@ -69,10 +69,8 @@ bool load(const char *dictionary) {
         if (table[idx] == NULL) {
             table[idx] = n;
         } else {
-            node *cur = NULL;
-            for (cur = table[idx]; cur->next != NULL; cur = cur->next)
-                ;
-            cur->next = n;
+            n->next = table[idx];
+            table[idx] = n;
         }
         ++items;
         // printf("%s\n", strtok(str, "\n"));
