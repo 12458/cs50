@@ -64,6 +64,7 @@ bool load(const char *dictionary) {
         if (n == NULL) {
             return false;
         }
+        n->next = NULL;
         strcpy(n->word, strtok(str, "\n"));
         // printf("COPIED STRING\n");
         if (table[idx] == NULL) {
