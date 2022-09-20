@@ -47,18 +47,17 @@ unsigned int hash(const char *word) {
 
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary) {
-    // printf("LOADING DICTIONARY: %s\n", dictionary);
+
     FILE *file = fopen(dictionary, "r");
     if (file == NULL) {
-        // printf("OPEN DICTIONARY FAILED\n");
+
         unload();
         return false;
     }
-    // printf("OPEN DICTIONARY SUCCESS\n");
+
     char str[LENGTH + 5];
     while (fgets(str, LENGTH + 5, file)) {
-        // printf("CURRENT STRING: %s\n", str);
-        // if ((strcmp("\n", str) == 0)||!(strlen(str) > 0)){break;}
+
         int idx = hash(str);
         node *n = malloc(sizeof(node));
         if (n == NULL) {
@@ -66,7 +65,7 @@ bool load(const char *dictionary) {
         }
         n->next = NULL;
         strcpy(n->word, strtok(str, "\n"));
-        // printf("COPIED STRING\n");
+
         if (table[idx] == NULL) {
             table[idx] = n;
         } else {
@@ -74,41 +73,15 @@ bool load(const char *dictionary) {
             table[idx] = n;
         }
         ++items;
-        // printf("%s\n", strtok(str, "\n"));
-        // printf("\n");
     }
     fclose(file);
 
-    // for (int i = 0; i < N; i++) {
-    //     if (table[i] == NULL) {
-    //         printf("[%i]: NULL\n", i);
-    //     } else {
-    //         printf("[%i]: %s", i, table[i]->word);
-    //         for (node *tmp = table[i]->next; tmp != NULL; tmp = tmp->next) {
-    //             printf(" %s", tmp->word);
-    //         }
-    //         printf("\n");
-    //     }
-    // }
-
-    // printf("LOAD SUCCESS\n");
     return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void) {
-    // int cum_sum = 0;
-    // for (int i = 0; i < N; i++) {
-    //     if (table[i] == NULL) {
-    //         continue;
-    //     } else {
-    //         int size = 0;
-    //         for (node *cur = table[i]; cur != NULL; cur = cur->next) {
-    //             size++;
-    //         }
-    //         cum_sum += size;
-    //     }
-    // }
+
     return items;
 }
 
