@@ -1,1 +1,2 @@
-print(f'hello, {input("What is your name?\n")}')
+x = input("What is your name?\n")
+print(f'hello, {x}')
