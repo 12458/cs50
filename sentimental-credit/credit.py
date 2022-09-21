@@ -20,9 +20,22 @@ def is_luhn_valid(card_number):
     return luhn_checksum(card_number) == 0
 
 
-card_num = input("Number: ")
-
-if 
+card_num = input("Number: ").strip()
 
 if re.search(VISA, card_num):
-
+    if is_luhn_valid(card_num):
+        print('VISA')
+    else:
+        print('INVALID')
+elif re.search(MASTERCARD, card_num):
+    if is_luhn_valid(card_num):
+        print('MASTERCARD')
+    else:
+        print('INVALID')
+elif re.search(AMEX, card_num):
+    if is_luhn_valid(card_num):
+        print('AMEX')
+    else:
+        print('INVALID')
+else:
+    print('INVALID')
