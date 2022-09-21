@@ -6,5 +6,5 @@ words = text.split(' ')
 word_count = len(words)
 sentence_count = text.count('.') + text.count('!') + text.count('?')
 letter_count = len([i for i in text if i in string.ascii_letters])
-L = le
+L = letter_count / ()
 index = 0.0588 * L - 0.296 * S - 15.8
