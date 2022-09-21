@@ -23,13 +23,11 @@ def main():
     for db_STR in database[0][1:]:
         matches[db_STR] = longest_match(sequence, db_STR)
 
-    print(matches)
     matches = list(matches.values())
-    print(matches)
+
     # TODO: Check database for matching profiles
     for record in database[1:]:
-        print()
-        if all([record[i + 1] == matches[i] for i in range(len(database[0][1:]))]):
+        if all([int(record[i + 1]) == matches[i] for i in range(len(database[0][1:]))]):
             print(record[0])
             return
     print('No Match')
