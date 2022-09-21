@@ -1,6 +1,7 @@
 while True:
     try:
         h = int(input('Height: '))
+        assert 1 <= h <= 8
         break
     except:
         pass
