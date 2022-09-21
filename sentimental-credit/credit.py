@@ -22,3 +22,7 @@ def is_luhn_valid(card_number):
 
 card_num = input("Number: ")
 
+if 
+
+if re.search(VISA, card_num):
+
