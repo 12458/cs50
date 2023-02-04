@@ -5,6 +5,7 @@
     "cs50.ddb50",
     "cs50.extension-uninstaller",
     "cs50.lab50",
+    "cs50.markdown50",
     "cs50.vscode-presentation-mode",
     "ms-python.python",
     "ms-vscode.cpptools",
@@ -15,13 +16,26 @@
     "vscjava.vscode-java-debug",
     "vsls-contrib.gitdoc"
   ],
-  "image": "ghcr.io/cs50/codespace:892a47376b4e621c65a277b9e25ee752465b1e5a",
+  "forwardPorts": [
+    5000,
+    5900,
+    6081,
+    8080,
+    8082
+  ],
+  "image": "ghcr.io/cs50/codespace:ff5f343b6bb02a376904405805099dcc6abe9134",
   "postCreateCommand": "/opt/cs50/bin/postCreateCommand",
+  "remoteEnv": {
+    "CS50_GH_USER": "${localEnv:GITHUB_USER}",
+    "GH_TOKEN": "${localEnv:CS50_TOKEN}",
+    "TZ": "${localEnv:CS50_TZ}"
+  },
   "settings": {
     "C_Cpp.autocomplete": "Disabled",
     "C_Cpp.codeFolding": "Disabled",
     "C_Cpp.debugShortcut": false,
     "C_Cpp.dimInactiveRegions": false,
+    "C_Cpp.doxygen.generateOnType": false,
     "C_Cpp.enhancedColorization": "Enabled",
     "C_Cpp.errorSquiggles": "Disabled",
     "breadcrumbs.enabled": false,
@@ -61,7 +75,7 @@
     "extension-uninstaller.uninstall": [
       "github.copilot",
       "github.copilot-nightly",
-      "ms-toolsai.jupyter",
+      "ms-toolsai.vscode-jupyter-cell-tags",
       "tabnine.tabnine-vscode"
     ],
     "extensions.ignoreRecommendations": true,
@@ -83,6 +97,7 @@
     "gitdoc.commitValidationLevel": "none",
     "gitdoc.enabled": true,
     "gitdoc.pullOnOpen": false,
+    "github.codespaces.devcontainerChangedNotificationStyle": "none",
     "github.gitAuthentication": true,
     "html.suggest.html5": false,
     "java.configuration.runtimes": [
@@ -92,6 +107,8 @@
         "path": "/opt/jdk-18.0.2.1"
       }
     ],
+    "java.debug.settings.enableRunDebugCodeLens": false,
+    "java.inlayHints.parameterNames.enabled": "none",
     "java.server.launchMode": "Standard",
     "javascript.suggest.enabled": false,
     "javascript.validate.enable": false,
@@ -104,6 +121,7 @@
       "workbench.action.toggleSidebarVisibility"
     ],
     "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.gpuAcceleration": "off",
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.profiles.linux": {
       "JavaScript Debug Terminal": null,
@@ -153,7 +171,12 @@
       "editorWarning.foreground": "#0000"
     },
     "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.enablePreview": false,
     "workbench.editor.untitled.hint": "hidden",
+    "workbench.editorAssociations": {
+      "*.wav": "vscode.audioPreview",
+      "README.md": "lab50.editor"
+    },
     "workbench.iconTheme": "vs-minimal",
     "workbench.preferredDarkColorTheme": "GitHub Dark Default",
     "workbench.preferredLightColorTheme": "GitHub Light Default",

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        // TODO: Add code to check answers to questions
+        function chk_ans_mcq(btn) {
+            console.log(btn.value);
+            if (btn.innerHTML == 'Answer') {
+                document.querySelector('#output_msg_mcq').innerHTML = 'Correct!';
+                btn.style.backgroundColor = 'green';
+            }
+            else {
+                document.querySelector('#output_msg_mcq').innerHTML = 'Incorrect!';
+                btn.style.backgroundColor = 'red';
+            }
+        }
+        function chk_ans_free() {
+            let input_field = document.querySelector('#free_response_1');
+            console.log(input_field.value);
+            if (input_field.value == 'Answer') {
+                document.querySelector('#output_msg_free').innerHTML = 'Correct!';
+                input_field.style.backgroundColor = 'green';
+            }
+            else {
+                document.querySelector('#output_msg_free').innerHTML = 'Incorrect!';
+                input_field.style.backgroundColor = 'red';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <!-- TODO: Add multiple choice question here -->
+            <h3>Question</h3>
+            <button onclick="chk_ans_mcq(this);">Answer</button>
+            <button onclick="chk_ans_mcq(this);">Answer 1</button>
+            <button onclick="chk_ans_mcq(this);">Answer 2</button>
+            <p id="output_msg_mcq"></p>
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <!-- TODO: Add free response question here -->
+            <h3>Question</h3>
+            <input type="text" name="" id="free_response_1"> <button onclick="chk_ans_free();">Check Answer</button>
+            <p id="output_msg_free"></p>
+        </div>
+    </div>
+</body>
+
+</html>
