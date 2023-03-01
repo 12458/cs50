@@ -27,11 +27,15 @@ def index():
     if request.method == "POST":
 
         # TODO: Add the user's entry into the database
-
+        name = request.form.get('name')
+        month = int(request.form.get('month'))
+        day = int(request.form.get('day'))
+        QUERY = 'INSERT INTO birthdays(name, month, day) VALUES (?, ?, ?)'
+        db.execute(QUERY, (name, month, day))
         return redirect("/")
 
     else:
-        QUERY = 'SELECT name, (month+"/"+day) birthday FROM birthdays;'
+        QUERY = 'SELECT name, (month || "/" || day) birthday FROM birthdays;'
 
         # TODO: Display the entries in the database on index.html
         birthdays = db.execute(QUERY)
