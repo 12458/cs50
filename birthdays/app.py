@@ -31,10 +31,11 @@ def index():
         return redirect("/")
 
     else:
-        QUERY = 'SELECT name, (month+`/`+day) FROM birthdays;'
+        QUERY = 'SELECT name, (month+"/"+day) birthday FROM birthdays;'
 
         # TODO: Display the entries in the database on index.html
         birthdays = db.execute(QUERY)
+        print(birthdays)
         return render_template("index.html", birthdays=birthdays)
 
 
