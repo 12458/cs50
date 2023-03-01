@@ -31,10 +31,11 @@ def index():
         return redirect("/")
 
     else:
-        QUERY = 'SELECT'
-        print( )
+        QUERY = 'SELECT name, bithday FROM birthdays;'
+
         # TODO: Display the entries in the database on index.html
+        birthdays = db.execute(QUERY)
+        return render_template("index.html", birthdays=birthdays)
 
-        return render_template("index.html")
 
-app.run(debug = True)
+app.run(debug=True)
