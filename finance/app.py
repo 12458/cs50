@@ -66,7 +66,6 @@ def login():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
         # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 403)
@@ -76,10 +75,14 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute(
+            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+        )
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(
+            rows[0]["hash"], request.form.get("password")
+        ):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -114,7 +117,28 @@ def quote():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    # Complete the implementation of register in such a way that it allows a user to register for an account via a form.
+    # Require that a user input a username, implemented as a text field whose name is username. Render an apology if the user’s input is blank or the username already exists.
+    # Require that a user input a password, implemented as a text field whose name is password, and then that same password again, implemented as a text field whose name is confirmation. Render an apology if either input is blank or the passwords do not match.
+    # Submit the user’s input via POST to /register.
+    # INSERT the new user into users, storing a hash of the user’s password, not the password itself. Hash the user’s password with generate_password_hash Odds are you’ll want to create a new template (e.g., register.html) that’s quite similar to login.html.
+
+    if request.method == "POST":
+        username = request.form.get("username").strip()
+        password = request.form.get("password").strip()
+        confirmation = request.form.get("confirmation").strip()
+        if username is None or password is None or confirmation is None:
+            return apology("Must provide username, password and confirmation", 400)
+        if password != confirmation:
+            return apology("Passwords do not match", 400)
+        hash = generate_password_hash(password)
+        rows = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if len(rows) > 0:
+            return apology("Username already exists", 400)
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
+
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
