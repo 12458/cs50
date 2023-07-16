@@ -111,7 +111,20 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    # Require that a user input a stock’s symbol, implemented as a text field whose name is symbol.
+    # Submit the user’s input via POST to /quote.
+    # Odds are you’ll want to create two new templates (e.g., quote.html and quoted.html). When a user visits /quote via GET, render one of those templates, inside of which should be an HTML form that submits to /quote via POST. In response to a POST, quote can render that second template, embedding within it one or more values from lookup.
+
+    if request.method == "POST":
+        symbol = request.form.get("symbol").strip()
+        if symbol is None:
+            return apology("Must provide symbol", 400)
+        quote = lookup(symbol)
+        if quote is None:
+            return apology("Invalid symbol", 400)
+        return render_template("quoted.html", quote=quote)
+    else:
+        return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
