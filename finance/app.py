@@ -145,7 +145,7 @@ def register():
         if len(rows) > 0:
             return apology("Username already exists", 400)
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
-
+        return redirect("/")
     else:
         return render_template("register.html")
 
