@@ -5,6 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import datetime
 
 from helpers import apology, login_required, lookup, usd
 
@@ -43,8 +44,45 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    # Require that a user input a stock’s symbol, implemented as a text field whose name is symbol. Render an apology if the input is blank or the symbol does not exist (as per the return value of lookup).
+    # Require that a user input a number of shares, implemented as a text field whose name is shares. Render an apology if the input is not a positive integer.
+    # Submit the user’s input via POST to /buy.
+    # Upon completion, redirect the user to the home page.
+    # Odds are you’ll want to call lookup to look up a stock’s current price.
+    # Odds are you’ll want to SELECT how much cash the user currently has in users.
+    # Add one or more new tables to finance.db via which to keep track of the purchase. Store enough information so that you know who bought what at what price and when.
+    # Use appropriate SQLite types.
+    # Define UNIQUE indexes on any fields that should be unique.
+    # Define (non-UNIQUE) indexes on any fields via which you will search (as via SELECT with WHERE).
+    # Render an apology, without completing a purchase, if the user cannot afford the number of shares at the current price.
+    # You don’t need to worry about race conditions (or use transactions).
 
+    if request.method == "POST":
+        symbol = request.form.get("symbol").strip()
+        shares = request.form.get("shares").strip()
+        if symbol is None or shares is None:
+            return apology("Must provide symbol and shares", 400)
+        quote = lookup(symbol)
+        if quote is None:
+            return apology("Invalid symbol", 400)
+        try:
+            shares = int(shares)
+            assert shares > 0
+        except ValueError:
+            return apology("Shares must be a positive integer", 400)
+        
+        rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+        cash = rows[0]["cash"]
+        price = quote["price"]
+        total = price * shares
+        if total > cash:
+            return apology("Insufficient funds", 400)
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price, type, timestamp) VALUES (?, ?, ?, ?, ?, ?)", 
+                                        session["user_id"], symbol, shares, price, "BUY", datetime.now())
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash - total, session["user_id"])
+        return redirect("/")
+    else:
+        return render_template("buy.html")
 
 @app.route("/history")
 @login_required
