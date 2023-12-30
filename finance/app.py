@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-from datetime import datetime
+from datetime import datetime, timezone
 
 from helpers import apology, login_required, lookup, usd
 
@@ -24,6 +24,25 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 
+def own_shares():
+    """Helper function: Which stocks the user owns, and numbers of shares owned. Return: dictionary {symbol: qty}"""
+    user_id = session["user_id"]
+    owns = {}
+    query = db.execute("SELECT symbol, shares FROM orders WHERE user_id = ?", user_id)
+    for q in query:
+        symbol, shares = q["symbol"], q["shares"]
+        owns[symbol] = owns.setdefault(symbol, 0) + shares
+    # filter zero-share stocks
+    owns = {k: v for k, v in owns.items() if v != 0}
+    return owns
+
+
+def time_now():
+    """HELPER: get current UTC date and time"""
+    now_utc = datetime.now(timezone.utc)
+    return str(now_utc.date()) + ' @time ' + now_utc.time().strftime("%H:%M:%S")
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -37,7 +56,17 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    owns = own_shares()
+    total = 0
+    for symbol, shares in owns.items():
+        result = lookup(symbol)
+        name, price = result["name"], result["price"]
+        stock_value = shares * price
+        total += stock_value
+        owns[symbol] = (name, shares, usd(price), usd(stock_value))
+    cash = db.execute("SELECT cash FROM users WHERE id = ? ", session["user_id"])[0]['cash']
+    total += cash
+    return render_template("index.html", owns=owns, cash=usd(cash), total=usd(total))
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -62,6 +91,9 @@ def buy():
         shares = request.form.get("shares").strip()
         if symbol is None or shares is None:
             return apology("Must provide symbol and shares", 400)
+        # Shares must be integer
+        if shares.isdigit() is False:
+            return apology("Shares must be a positive integer", 400)
         quote = lookup(symbol)
         if quote is None:
             return apology("Invalid symbol", 400)
@@ -70,25 +102,27 @@ def buy():
             assert shares > 0
         except ValueError:
             return apology("Shares must be a positive integer", 400)
-        
+
         rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
         cash = rows[0]["cash"]
         price = quote["price"]
         total = price * shares
         if total > cash:
             return apology("Insufficient funds", 400)
-        db.execute("INSERT INTO transactions (user_id, symbol, shares, price, type, timestamp) VALUES (?, ?, ?, ?, ?, ?)", 
-                                        session["user_id"], symbol, shares, price, "BUY", datetime.now())
         db.execute("UPDATE users SET cash = ? WHERE id = ?", cash - total, session["user_id"])
+        db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)",
+                   session["user_id"], symbol, shares, price, time_now())
         return redirect("/")
     else:
         return render_template("buy.html")
+
 
 @app.route("/history")
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+    rows = db.execute("SELECT symbol, shares, price, timestamp FROM orders WHERE user_id = ?", session["user_id"])
+    return render_template("history.html", rows=rows)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -156,6 +190,7 @@ def quote():
         quote = lookup(symbol)
         if quote is None:
             return apology("Invalid symbol", 400)
+        quote['price'] = usd(quote['price'])
         return render_template("quoted.html", quote=quote)
     else:
         return render_template("quote.html")
@@ -171,6 +206,9 @@ def register():
     # INSERT the new user into users, storing a hash of the user’s password, not the password itself. Hash the user’s password with generate_password_hash Odds are you’ll want to create a new template (e.g., register.html) that’s quite similar to login.html.
 
     if request.method == "POST":
+        # Check for blank inputs
+        if not request.form.get("username") or not request.form.get("password") or not request.form.get("confirmation"):
+            return apology("Must provide username, password and confirmation", 400)
         username = request.form.get("username").strip()
         password = request.form.get("password").strip()
         confirmation = request.form.get("confirmation").strip()
@@ -192,4 +230,24 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    owns = own_shares()
+    if request.method == "GET":
+        return render_template("sell.html", owns=owns.keys())
+
+    symbol = request.form.get("symbol")
+    shares = int(request.form.get("shares"))  # Don't forget: convert str to int
+    # check whether there are sufficient shares to sell
+    if owns[symbol] < shares:
+        return apology("Insufficient shares", 400)
+    # Execute sell transaction: look up sell price, and add fund to cash,
+    result = lookup(symbol)
+    user_id = session["user_id"]
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]['cash']
+    price = result["price"]
+    remain = cash + price * shares
+    db.execute("UPDATE users SET cash = ? WHERE id = ?", remain, user_id)
+    # Log the transaction into orders
+    db.execute("INSERT INTO orders (user_id, symbol, shares, price, timestamp) VALUES (?, ?, ?, ?, ?)",
+               user_id, symbol, -shares, price, time_now())
+
+    return redirect("/")
