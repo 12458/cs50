@@ -2,13 +2,17 @@
 
 > Year 2022/2023
 
-# Cloning Repository
+## Certificate
+
+<img src="https://certificates.cs50.io/e709df56-f248-4b6c-9f2f-209dabb8d75d.png?size=A4" alt="Shang En's Certificate" width="50%"/>
+
+## Cloning Repository
 
 ```sh
 git clone https://github.com/12458/cs50.git
 ```
 
-# License
+## License
 
 All code in this repository is licensed under the [MIT License](https://github.com/12458/cs50/blob/master/LICENSE).
 
